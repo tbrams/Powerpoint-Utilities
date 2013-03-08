@@ -8,3 +8,4 @@ C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsFo
 C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\Remove PowerPoint Notes.exe
 C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\Remove PowerPoint Notes.pdb
 C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\WindowsForms_Automate_Powerpoint.Form2.resources
+C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\WindowsForms_Automate_Powerpoint.optionsForm.resources

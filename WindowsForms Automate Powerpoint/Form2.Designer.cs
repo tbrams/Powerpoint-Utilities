@@ -35,6 +35,8 @@
             this.pictureListBox = new System.Windows.Forms.ListBox();
             this.btnMoveUp = new System.Windows.Forms.Button();
             this.btnMoveDown = new System.Windows.Forms.Button();
+            this.lblRemove = new System.Windows.Forms.Label();
+            this.optionButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // quitButton
@@ -101,11 +103,33 @@
             this.btnMoveDown.UseVisualStyleBackColor = true;
             this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
             // 
+            // lblRemove
+            // 
+            this.lblRemove.AutoSize = true;
+            this.lblRemove.Location = new System.Drawing.Point(743, 83);
+            this.lblRemove.Name = "lblRemove";
+            this.lblRemove.Size = new System.Drawing.Size(64, 26);
+            this.lblRemove.TabIndex = 8;
+            this.lblRemove.Text = "DblClick:\r\nremove item";
+            this.lblRemove.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // optionButton
+            // 
+            this.optionButton.Location = new System.Drawing.Point(12, 101);
+            this.optionButton.Name = "optionButton";
+            this.optionButton.Size = new System.Drawing.Size(79, 38);
+            this.optionButton.TabIndex = 9;
+            this.optionButton.Text = "Options";
+            this.optionButton.UseVisualStyleBackColor = true;
+            this.optionButton.Click += new System.EventHandler(this.optionButton_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(840, 382);
+            this.Controls.Add(this.optionButton);
+            this.Controls.Add(this.lblRemove);
             this.Controls.Add(this.btnMoveDown);
             this.Controls.Add(this.btnMoveUp);
             this.Controls.Add(this.pictureListBox);
@@ -116,6 +140,7 @@
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -128,5 +153,7 @@
         private System.Windows.Forms.ListBox pictureListBox;
         private System.Windows.Forms.Button btnMoveUp;
         private System.Windows.Forms.Button btnMoveDown;
+        private System.Windows.Forms.Label lblRemove;
+        private System.Windows.Forms.Button optionButton;
     }
 }

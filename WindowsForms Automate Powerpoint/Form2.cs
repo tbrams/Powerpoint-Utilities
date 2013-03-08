@@ -17,9 +17,15 @@ using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
 namespace WindowsForms_Automate_Powerpoint
 {
+
     public partial class Form2 : Form
     {
         string fileName;
+        // Timing for animation 
+        float myFirstDelay = 0;
+        float myFirstDuration = 0.5F;
+        float myDuration = 1.75F;
+        float myDelay = 2.0F;
 
         public Form2()
         {
@@ -31,16 +37,52 @@ namespace WindowsForms_Automate_Powerpoint
             Application.Exit();
         }
 
+        public void setTimingOptions(float myFDel, float myFDur, float myDel, float myDur) {
+            myFirstDelay=myFDel;
+            myFirstDuration=myFDur;
+            myDelay=myDel;
+            myDuration=myDur;
+        }
+
 
         private void Form2_Load(object sender, EventArgs e)
         {
             quitButton.Visible = false;
             InsertPictureButton.Visible = false;
+            optionButton.Visible = false;
             pictureListBox.Visible = false;
             btnMoveDown.Visible = false;
             btnMoveUp.Visible = false;
+            lblRemove.Visible = false;
+
+            this.AllowDrop = true;
+            this.DragEnter += new DragEventHandler(Form2_DragEnter);
+            this.DragDrop += new DragEventHandler(Form2_DragDrop);
+
         }
 
+        void Form2_DragEnter(object sender, DragEventArgs e)
+        {
+            if (pictureListBox.Visible)
+               if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        void Form2_DragDrop(object sender, DragEventArgs e)
+        {
+            if (pictureListBox.Visible)
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                foreach (string file in files)
+                {
+                    string dragFileType = System.IO.Path.GetExtension(file);
+                    if (dragFileType.Equals(".png",StringComparison.OrdinalIgnoreCase))
+                    {
+                        Debug.WriteLine("Dragged this into listbox: " + file);
+                        pictureListBox.Items.Add(file);
+                    }
+                }
+            }
+        }
 
         private void openGraphicsButton_Click(object sender, EventArgs e)
         {
@@ -87,11 +129,13 @@ namespace WindowsForms_Automate_Powerpoint
                 btnMoveUp.Enabled = false;
                 btnMoveDown.Visible = true;
                 btnMoveDown.Enabled = false;
+                lblRemove.Visible = true;
             }
             else
                 Debug.WriteLine("Something went wrong reading the filename from the Dialog");
 
             quitButton.Visible = true;
+            optionButton.Visible = true;
             InsertPictureButton.Visible = true;
         }
 
@@ -109,16 +153,25 @@ namespace WindowsForms_Automate_Powerpoint
 
                 // Create a new Presentation. 
                 PowerPoint.Presentation oPre = oPowerPoint.Presentations.Add(Microsoft.Office.Core.MsoTriState.msoTrue);
-                Debug.WriteLine("A new presentation is created");
+                Debug.WriteLine("New presentation created");
 
-                // Insert a new Slide and add some text to it. 
-                Debug.WriteLine("Text Slide inserted");
+                // Insert a new Slide with the picture name as title and a short explanation. 
+                string slideTitle = pictureListBox.Items[0].ToString();
+                slideTitle = System.IO.Path.GetFileNameWithoutExtension(slideTitle);
+
                 PowerPoint.Slide oSlide = oPre.Slides.Add(1, PowerPoint.PpSlideLayout.ppLayoutText);
-                oSlide.Shapes[1].TextFrame.TextRange.Text = "Fist slide inserted";
+                oSlide.Shapes[1].TextFrame.TextRange.Text = "Slides about "+slideTitle;
+                oSlide.Shapes[2].TextFrame.TextRange.Text = "Explanation about the build nature of the slide...";
+
+
+
+                // Make the slide hidden, so it will not appear in the slide show
+                oSlide.SlideShowTransition.Hidden = MsoTriState.msoTrue;
+                
 
                 // Insert a new blank Slide for the picture. 
                 oSlide = oPre.Slides.Add(2, PowerPoint.PpSlideLayout.ppLayoutBlank);
-                Console.WriteLine("Blank slide for images inserted");
+                Debug.WriteLine("Blank slide for images inserted");
 
                 // Animation settings
                 // myTrigger is used between pictures normally, myAlternativeTrigger can be used to click through the images
@@ -129,95 +182,45 @@ namespace WindowsForms_Automate_Powerpoint
                 PowerPoint.MsoAnimEffect myAnimation = PowerPoint.MsoAnimEffect.msoAnimEffectFade;
           //      PowerPoint.MsoAnimEffect myAlternativeAnimation = PowerPoint.MsoAnimEffect.msoAnimEffectAppear;
 
-                // Timing for animation - CHANGE LATER !!!
-                float myFirstDelay=0;
-                float myFirstDuration = 0.5F;
-                float myDuration = 1.75F;
-                float myDelay = 2.0F;
 
                 Boolean FirstImage = true;  // Used to handle special effect for very first picture
                 foreach (string p in pictureListBox.Items)
                 {                    
                     string imageFileName = p;
 
-                    Bitmap myBitmap = new Bitmap(@imageFileName);
-                    Graphics g = Graphics.FromImage(myBitmap);
-
-                    float dx, dy;
-                    try
-                    {
-                        dx = g.DpiX;
-                        dy = g.DpiY;
-                    }
-                    finally
-                    {
-                        g.Dispose();
-                    }
-                    Debug.WriteLine("DPI Info for " + imageFileName);
-                    Debug.WriteLine(" dpix:" + dx);
-                    Debug.WriteLine(" dpiy:" + dy);
-
+                    mcImageDetails imageDetails = new mcImageDetails(imageFileName);
+                    float dx = imageDetails.dx;
+                    float dy = imageDetails.dy;
+                    double imageWidth = imageDetails.imageWidth;
+                    double imageHeight = imageDetails.imageHeight;
 
                     PowerPoint.Shape myPic;
                     myPic = oSlide.Shapes.AddPicture(imageFileName, Office.MsoTriState.msoFalse, Office.MsoTriState.msoTrue, 1, 1, -1, -1);
-
-                    // find png file dimensions
-                    var buff = new byte[32];
-                    using (var d = File.OpenRead(imageFileName))
-                    {
-                        d.Read(buff, 0, 32);
-                    }
-                    const int wOff = 16;
-                    const int hOff = 20;
-                    double imageWidth = (double)BitConverter.ToInt32(new[] { buff[wOff + 3], buff[wOff + 2], buff[wOff + 1], buff[wOff + 0], }, 0);
-                    double imageHeight = (double)BitConverter.ToInt32(new[] { buff[hOff + 3], buff[hOff + 2], buff[hOff + 1], buff[hOff + 0], }, 0);
-
-                    // Scale to fit slide area
-                    double xfactor = 1.0;
-
-                    Rectangle bounds = Screen.GetBounds(Point.Empty);
-                    Debug.WriteLine("Device Resolution:");
-                    Debug.WriteLine("Y scaling: " +bounds.Height);
-                    Debug.WriteLine("X scaling: " + bounds.Width);
                  
                     const float PixelPerPoint=(float)4/3;
                     double slideWidth = oPowerPoint.ActivePresentation.PageSetup.SlideWidth * PixelPerPoint;
                     double slideHeight = oPowerPoint.ActivePresentation.PageSetup.SlideHeight * PixelPerPoint;
 
-                    //double aspectRatioScreen = (double)bounds.Width / (double)bounds.Height;
-                    //double aspectRatioSlide = slideWidth / slideHeight;
 
-                    //if (aspectRatioSlide>=aspectRatioScreen) {
-                    //   ppp = bounds.Width/slideWidth;
-                    //} else {
-                    //   ppp = bounds.Height/slideHeight;
-                    //}
-
-                    double ppp = dx/96;
+                    // Scale to fit slide area
+                    double xfactor = 1.0;
+                    double ppp = dx / 96;
 
                     if (imageWidth> imageHeight) {
                           // X Scaling
                           xfactor=(slideWidth/imageWidth)*ppp;
-                       // xfactor=(float)960/575;
                           myPic.ScaleWidth((float)xfactor, Office.MsoTriState.msoTrue, MsoScaleFrom.msoScaleFromMiddle);
                     }
                     else
                     {
                           // Y Scaling
-                          // Something is wrong... if there is a DPI statement in the file things start going wrong.
-                          // I can get a perfect fit for 120 DPI and this ppp below, but otherwise it does not work
-                          // unfortunately
                           xfactor = (slideHeight / imageHeight)*ppp;
-                          // if DPI == 96 no need for ppp
-                          // if DPI == 120 - need 1.25 more size, confirm with Picture1.png
-                        
-//                          xfactor = slideHeight / imageHeight;
                           myPic.ScaleHeight((float)xfactor, Office.MsoTriState.msoTrue, MsoScaleFrom.msoScaleFromMiddle);
                     }
 
 
-                    Debug.WriteLine("myPic w x h:" + imageWidth + ", " + imageHeight);
-                    Debug.WriteLine("Page  w x h: " + slideWidth + ", " + slideHeight);
+                    Debug.WriteLine("Image w x h:" + imageWidth + ", " + imageHeight);
+                    Debug.WriteLine("Slide  w x h: " + slideWidth + ", " + slideHeight);
                     Debug.WriteLine("Xfactor : " + xfactor);
                    
                     myPic.Left = oPowerPoint.ActivePresentation.PageSetup.SlideWidth / 2 - myPic.Width / 2;
@@ -253,7 +256,7 @@ namespace WindowsForms_Automate_Powerpoint
                 }
 
                 // Save the presentation as a pptx file and close it. 
-                Console.WriteLine("Save and close the presentation");
+                Debug.WriteLine("Save and close the presentation");
 
                 string shortFileName = System.IO.Path.GetFileName(fileName);
                 string saveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -269,13 +272,13 @@ namespace WindowsForms_Automate_Powerpoint
                 oPre.Close();
 
                 // Quit the PowerPoint application. 
-                Console.WriteLine("Quit the PowerPoint application");
+                Debug.WriteLine("Quit the PowerPoint application");
                 oPowerPoint.Quit();
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Solution1.AutomatePowerPoint throws the error: {0}",
+                Debug.WriteLine("Solution1.AutomatePowerPoint throws the error: {0}",
                     ex.Message);
             }
         }
@@ -326,6 +329,18 @@ namespace WindowsForms_Automate_Powerpoint
             pictureListBox.Items.Insert(newIndex, selected);
             // Restore selection
             pictureListBox.SetSelected(newIndex, true);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void optionButton_Click(object sender, EventArgs e)
+        {
+            optionsForm options = new optionsForm();
+
+            options.Show();
         }
 
 
