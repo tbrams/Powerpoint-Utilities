@@ -13,7 +13,7 @@ namespace WindowsForms_Automate_Powerpoint
 {
     public partial class optionsForm : Form
     {
-        private Form2 mainForm = null;
+        private FormAutomateImageAnimation mainForm = null;
 
         public optionsForm()
         {
@@ -22,7 +22,7 @@ namespace WindowsForms_Automate_Powerpoint
 
         public optionsForm(Form callingForm)
         {
-            mainForm = callingForm as Form2;
+            mainForm = callingForm as FormAutomateImageAnimation;
             InitializeComponent();
 
         }

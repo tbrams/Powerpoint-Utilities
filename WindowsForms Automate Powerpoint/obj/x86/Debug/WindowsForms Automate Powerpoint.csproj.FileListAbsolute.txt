@@ -1,11 +1,13 @@
 C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\WindowsForms_Automate_Powerpoint.Form1.resources
 C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\WindowsForms_Automate_Powerpoint.Properties.Resources.resources
 C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\GenerateResource.write.1.tlog
-C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\bin\Debug\Remove PowerPoint Notes.exe
-C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\bin\Debug\Remove PowerPoint Notes.pdb
-C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\Remove PowerPoint Notes.exe
-C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\Remove PowerPoint Notes.pdb
-C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\WindowsForms_Automate_Powerpoint.Form2.resources
 C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\WindowsForms_Automate_Powerpoint.optionsForm.resources
+C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\WindowsForms_Automate_Powerpoint.startupForm.resources
+C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\bin\Debug\PowerPoint Utilities.exe
+C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\bin\Debug\PowerPoint Utilities.pdb
+C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\WindowsForms_Automate_Powerpoint.AboutForm.resources
+C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\PowerPoint Utilities.exe
+C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\PowerPoint Utilities.pdb
+C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\WindowsForms_Automate_Powerpoint.FormSecureComments.resources
+C:\Users\tb\Dropbox\Projekter\C#\Test\WindowsForms Automate Powerpoint\WindowsForms Automate Powerpoint\obj\x86\Debug\WindowsForms_Automate_Powerpoint.FormAutomateImageAnimation.resources

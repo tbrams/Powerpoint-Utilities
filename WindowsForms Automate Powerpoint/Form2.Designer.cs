@@ -1,6 +1,6 @@
 ﻿namespace WindowsForms_Automate_Powerpoint
 {
-    partial class Form2
+    partial class FormAutomateImageAnimation
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAutomateImageAnimation));
             this.quitButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openGraphicsButton = new System.Windows.Forms.Button();
@@ -67,7 +68,7 @@
             // 
             // InsertPictureButton
             // 
-            this.InsertPictureButton.Location = new System.Drawing.Point(12, 57);
+            this.InsertPictureButton.Location = new System.Drawing.Point(12, 100);
             this.InsertPictureButton.Name = "InsertPictureButton";
             this.InsertPictureButton.Size = new System.Drawing.Size(79, 38);
             this.InsertPictureButton.TabIndex = 4;
@@ -118,7 +119,7 @@
             // 
             // optionButton
             // 
-            this.optionButton.Location = new System.Drawing.Point(12, 101);
+            this.optionButton.Location = new System.Drawing.Point(12, 56);
             this.optionButton.Name = "optionButton";
             this.optionButton.Size = new System.Drawing.Size(79, 38);
             this.optionButton.TabIndex = 9;
@@ -135,7 +136,7 @@
             this.pictureBox.TabIndex = 10;
             this.pictureBox.TabStop = false;
             // 
-            // Form2
+            // FormAutomateImageAnimation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -149,8 +150,9 @@
             this.Controls.Add(this.InsertPictureButton);
             this.Controls.Add(this.openGraphicsButton);
             this.Controls.Add(this.quitButton);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FormAutomateImageAnimation";
+            this.Text = "Automate PowerPoint Image Animation";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);

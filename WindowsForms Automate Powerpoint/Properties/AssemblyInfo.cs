@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WindowsForms Automate Powerpoint")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("About PowerPoint Utilities")]
+[assembly: AssemblyDescription("This is a collection of features, I have found useful when working with PowerPoint")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WindowsForms Automate Powerpoint")]
+[assembly: AssemblyCompany("Torben Brams")]
+[assembly: AssemblyProduct("PowerPoint Utilities")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

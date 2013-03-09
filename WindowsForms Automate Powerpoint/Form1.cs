@@ -16,12 +16,12 @@ using System.Reflection;
 
 namespace WindowsForms_Automate_Powerpoint
 {
-    public partial class Form1 : Form
+    public partial class FormSecureComments : Form
     {
         string fileName;
         List<string> myComments = new List<string>();
 
-        public Form1()
+        public FormSecureComments()
         {
             InitializeComponent();
         }

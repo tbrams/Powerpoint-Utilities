@@ -1,6 +1,6 @@
 ﻿namespace WindowsForms_Automate_Powerpoint
 {
-    partial class Form1
+    partial class FormSecureComments
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSecureComments));
             this.openFileButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.buttonStrip = new System.Windows.Forms.Button();
@@ -42,9 +42,10 @@
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(34, 14);
+            this.openFileButton.Location = new System.Drawing.Point(26, 11);
+            this.openFileButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(110, 43);
+            this.openFileButton.Size = new System.Drawing.Size(82, 35);
             this.openFileButton.TabIndex = 0;
             this.openFileButton.Text = "Open";
             this.openFileButton.UseVisualStyleBackColor = true;
@@ -56,9 +57,10 @@
             // 
             // buttonStrip
             // 
-            this.buttonStrip.Location = new System.Drawing.Point(34, 141);
+            this.buttonStrip.Location = new System.Drawing.Point(26, 115);
+            this.buttonStrip.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonStrip.Name = "buttonStrip";
-            this.buttonStrip.Size = new System.Drawing.Size(110, 43);
+            this.buttonStrip.Size = new System.Drawing.Size(82, 35);
             this.buttonStrip.TabIndex = 3;
             this.buttonStrip.Text = "Strip";
             this.buttonStrip.UseVisualStyleBackColor = true;
@@ -70,9 +72,10 @@
             // 
             // buttonBackup
             // 
-            this.buttonBackup.Location = new System.Drawing.Point(34, 92);
+            this.buttonBackup.Location = new System.Drawing.Point(26, 75);
+            this.buttonBackup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonBackup.Name = "buttonBackup";
-            this.buttonBackup.Size = new System.Drawing.Size(110, 43);
+            this.buttonBackup.Size = new System.Drawing.Size(82, 35);
             this.buttonBackup.TabIndex = 6;
             this.buttonBackup.Text = "Backup";
             this.buttonBackup.UseVisualStyleBackColor = true;
@@ -81,44 +84,48 @@
             // labelComments
             // 
             this.labelComments.AutoSize = true;
-            this.labelComments.Location = new System.Drawing.Point(544, 120);
+            this.labelComments.Location = new System.Drawing.Point(408, 98);
+            this.labelComments.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelComments.Name = "labelComments";
-            this.labelComments.Size = new System.Drawing.Size(78, 17);
+            this.labelComments.Size = new System.Drawing.Size(59, 13);
             this.labelComments.TabIndex = 7;
             this.labelComments.Text = "Comments:";
             // 
             // textboxComments
             // 
-            this.textboxComments.Location = new System.Drawing.Point(164, 14);
+            this.textboxComments.Location = new System.Drawing.Point(123, 11);
+            this.textboxComments.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textboxComments.Name = "textboxComments";
-            this.textboxComments.Size = new System.Drawing.Size(693, 229);
+            this.textboxComments.Size = new System.Drawing.Size(521, 187);
             this.textboxComments.TabIndex = 8;
             this.textboxComments.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 68);
+            this.label1.Location = new System.Drawing.Point(28, 55);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 17);
+            this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Comments:";
             // 
             // buttonQuit
             // 
-            this.buttonQuit.Location = new System.Drawing.Point(34, 200);
+            this.buttonQuit.Location = new System.Drawing.Point(26, 162);
+            this.buttonQuit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonQuit.Name = "buttonQuit";
-            this.buttonQuit.Size = new System.Drawing.Size(110, 43);
+            this.buttonQuit.Size = new System.Drawing.Size(82, 35);
             this.buttonQuit.TabIndex = 10;
             this.buttonQuit.Text = "Quit";
             this.buttonQuit.UseVisualStyleBackColor = true;
             this.buttonQuit.Click += new System.EventHandler(this.buttonQuit_Click);
             // 
-            // Form1
+            // FormSecureComments
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(291, 261);
+            this.ClientSize = new System.Drawing.Size(218, 212);
             this.Controls.Add(this.buttonQuit);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textboxComments);
@@ -127,8 +134,9 @@
             this.Controls.Add(this.buttonStrip);
             this.Controls.Add(this.openFileButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
-            this.Text = "PowerPoint Cleanup";
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "FormSecureComments";
+            this.Text = "Secure PowerPoint Comments";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

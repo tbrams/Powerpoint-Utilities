@@ -18,7 +18,7 @@ using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 namespace WindowsForms_Automate_Powerpoint
 {
 
-    public partial class Form2 : Form
+    public partial class FormAutomateImageAnimation : Form
     {
         string fileName;
 
@@ -38,7 +38,7 @@ namespace WindowsForms_Automate_Powerpoint
         // Normally first image will just appear. If not, set the following to false
         public Boolean FirstImageAppearWithPrevious = true;
 
-        public Form2()
+        public FormAutomateImageAnimation()
         {
             InitializeComponent();
         }
@@ -79,10 +79,15 @@ namespace WindowsForms_Automate_Powerpoint
                 foreach (string file in files)
                 {
                     string dragFileType = System.IO.Path.GetExtension(file);
-                    if (dragFileType.Equals(".png",StringComparison.OrdinalIgnoreCase))
+                    if (dragFileType.Equals(".png", StringComparison.OrdinalIgnoreCase))
                     {
                         Debug.WriteLine("Dragged this into listbox: " + file);
                         pictureListBox.Items.Add(file);
+                    }
+                    else
+                    {
+                        // Msgbox with filetype support flag goes here...
+                        MessageBox.Show("This image type is currently not supported", "PNG Images only");
                     }
                 }
             }
@@ -118,7 +123,7 @@ namespace WindowsForms_Automate_Powerpoint
                 fileName = dialog.FileName;
 
                 this.Text = this.Text + ":" + System.IO.Path.GetFileName(fileName);
-                this.Size = new Size(900, 500);
+                // this.Size = new Size(900, 500);
 
                 string localFile = System.IO.Path.GetFileNameWithoutExtension(fileName);
                 localFile=localFile.Replace("1", ""); // Just in case this is the first in a series
@@ -153,7 +158,7 @@ namespace WindowsForms_Automate_Powerpoint
                 // invisible. (Not allowed???)
 
                 PowerPoint.Application oPowerPoint = new PowerPoint.Application();
-               //oPowerPoint.Visible = Office.MsoTriState.msoFalse; 
+                oPowerPoint.Visible = Office.MsoTriState.msoFalse; 
 
                 // Create a new Presentation. 
                 PowerPoint.Presentation oPre = oPowerPoint.Presentations.Add(Microsoft.Office.Core.MsoTriState.msoTrue);
