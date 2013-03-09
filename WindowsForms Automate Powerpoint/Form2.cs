@@ -21,11 +21,22 @@ namespace WindowsForms_Automate_Powerpoint
     public partial class Form2 : Form
     {
         string fileName;
-        // Timing for animation 
-        float myFirstDelay = 0;
-        float myFirstDuration = 0.5F;
-        float myDuration = 1.75F;
-        float myDelay = 2.0F;
+
+        // Animation Settings
+        // Timing 
+        public float myFirstDelay = 0;
+        public float myFirstDuration = 0.5F;
+        public float myDuration = 1.75F;
+        public float myDelay = 2.0F;
+
+        // myTrigger is used between pictures - change to onClick if you want control here
+        public PowerPoint.MsoAnimTriggerType myTrigger = PowerPoint.MsoAnimTriggerType.msoAnimTriggerAfterPrevious;
+
+        // Animations are kept simple, normal effeft is fading, feel free to select an alternative
+        public PowerPoint.MsoAnimEffect myAnimation = PowerPoint.MsoAnimEffect.msoAnimEffectFade;
+
+        // Normally first image will just appear. If not, set the following to false
+        public Boolean FirstImageAppearWithPrevious = true;
 
         public Form2()
         {
@@ -35,13 +46,6 @@ namespace WindowsForms_Automate_Powerpoint
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        public void setTimingOptions(float myFDel, float myFDur, float myDel, float myDur) {
-            myFirstDelay=myFDel;
-            myFirstDuration=myFDur;
-            myDelay=myDel;
-            myDuration=myDur;
         }
 
 
@@ -173,14 +177,6 @@ namespace WindowsForms_Automate_Powerpoint
                 oSlide = oPre.Slides.Add(2, PowerPoint.PpSlideLayout.ppLayoutBlank);
                 Debug.WriteLine("Blank slide for images inserted");
 
-                // Animation settings
-                // myTrigger is used between pictures normally, myAlternativeTrigger can be used to click through the images
-                PowerPoint.MsoAnimTriggerType myTrigger = PowerPoint.MsoAnimTriggerType.msoAnimTriggerAfterPrevious;
-          //      PowerPoint.MsoAnimTriggerType myAlternativeTrigger = PowerPoint.MsoAnimTriggerType.msoAnimTriggerOnPageClick;
-
-                // Animations are kept simple, normal effeft is fading, alternative is appearing
-                PowerPoint.MsoAnimEffect myAnimation = PowerPoint.MsoAnimEffect.msoAnimEffectFade;
-          //      PowerPoint.MsoAnimEffect myAlternativeAnimation = PowerPoint.MsoAnimEffect.msoAnimEffectAppear;
 
 
                 Boolean FirstImage = true;  // Used to handle special effect for very first picture
@@ -230,7 +226,7 @@ namespace WindowsForms_Automate_Powerpoint
                     // Remove the trigger for first image, so that it will appear automatically
                     PowerPoint.MsoAnimTriggerType thisTrigger; 
                     thisTrigger=myTrigger;
-                    if (FirstImage) {
+                    if (FirstImage && FirstImageAppearWithPrevious) {
                         thisTrigger=PowerPoint.MsoAnimTriggerType.msoAnimTriggerWithPrevious;
                     } 
                     PowerPoint.Effect myEffect;
@@ -294,8 +290,11 @@ namespace WindowsForms_Automate_Powerpoint
 
         private void pictureListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnMoveUp.Enabled = true;
-            btnMoveDown.Enabled = true;
+            if (pictureListBox.SelectedItem !=null) {
+                pictureBox.ImageLocation = pictureListBox.SelectedItem.ToString();         
+                btnMoveUp.Enabled = true;
+                btnMoveDown.Enabled = true;
+            }
         }
 
         private void btnMoveUp_Click(object sender, EventArgs e)
@@ -314,21 +313,36 @@ namespace WindowsForms_Automate_Powerpoint
             if (pictureListBox.SelectedItem == null || pictureListBox.SelectedIndex < 0)
                 return; // No selected item - nothing to do
 
-            // Calculate new index using move direction
-            int newIndex = pictureListBox.SelectedIndex + direction;
-
             // Checking bounds of the range
-            if (newIndex < 0 || newIndex >= pictureListBox.Items.Count)
+            if (pictureListBox.SelectedIndex + direction < 0 || 
+                pictureListBox.SelectedIndex + direction+ pictureListBox.SelectedItems.Count > pictureListBox.Items.Count)
                 return; // Index out of range - nothing to do
 
-            object selected = pictureListBox.SelectedItem;
+            int start=pictureListBox.SelectedIndex;
+            int howMany=pictureListBox.SelectedItems.Count;
+            string moveThisItem="";
 
-            // Removing removable element
-            pictureListBox.Items.Remove(selected);
-            // Insert it in new position
-            pictureListBox.Items.Insert(newIndex, selected);
-            // Restore selection
-            pictureListBox.SetSelected(newIndex, true);
+            if (direction > 0)
+            {
+                // backup and delete item at position [start+howmany], then insert it at [start]
+                moveThisItem = pictureListBox.Items[start+howMany].ToString(); ;
+                pictureListBox.Items.RemoveAt(start+howMany);
+                pictureListBox.Items.Insert(start, moveThisItem);
+                // Restore selection in new position
+                //pictureListBox.SetSelected(start, true);
+
+            }
+            else
+            {
+                // backup and delete item at position [start-1], then insert at [start+howmany-1]
+                moveThisItem = pictureListBox.Items[start -1].ToString(); ;
+                pictureListBox.Items.RemoveAt(start-1);
+                pictureListBox.Items.Insert(start+howMany-1, moveThisItem);
+                // Restore selection in new position
+                //pictureListBox.SetSelected(start+howMany-1, true);
+
+            }
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -338,7 +352,7 @@ namespace WindowsForms_Automate_Powerpoint
 
         private void optionButton_Click(object sender, EventArgs e)
         {
-            optionsForm options = new optionsForm();
+            optionsForm options = new optionsForm(this);
 
             options.Show();
         }

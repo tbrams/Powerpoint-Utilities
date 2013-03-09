@@ -37,6 +37,8 @@
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.lblRemove = new System.Windows.Forms.Label();
             this.optionButton = new System.Windows.Forms.Button();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // quitButton
@@ -78,14 +80,15 @@
             this.pictureListBox.FormattingEnabled = true;
             this.pictureListBox.Location = new System.Drawing.Point(113, 15);
             this.pictureListBox.Name = "pictureListBox";
-            this.pictureListBox.Size = new System.Drawing.Size(609, 355);
+            this.pictureListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.pictureListBox.Size = new System.Drawing.Size(301, 355);
             this.pictureListBox.TabIndex = 5;
             this.pictureListBox.SelectedIndexChanged += new System.EventHandler(this.pictureListBox_SelectedIndexChanged);
             this.pictureListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureListBox_MouseDoubleClick);
             // 
             // btnMoveUp
             // 
-            this.btnMoveUp.Location = new System.Drawing.Point(740, 15);
+            this.btnMoveUp.Location = new System.Drawing.Point(527, 15);
             this.btnMoveUp.Name = "btnMoveUp";
             this.btnMoveUp.Size = new System.Drawing.Size(75, 23);
             this.btnMoveUp.TabIndex = 6;
@@ -95,7 +98,7 @@
             // 
             // btnMoveDown
             // 
-            this.btnMoveDown.Location = new System.Drawing.Point(740, 44);
+            this.btnMoveDown.Location = new System.Drawing.Point(527, 44);
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(75, 23);
             this.btnMoveDown.TabIndex = 7;
@@ -106,7 +109,7 @@
             // lblRemove
             // 
             this.lblRemove.AutoSize = true;
-            this.lblRemove.Location = new System.Drawing.Point(743, 83);
+            this.lblRemove.Location = new System.Drawing.Point(530, 83);
             this.lblRemove.Name = "lblRemove";
             this.lblRemove.Size = new System.Drawing.Size(64, 26);
             this.lblRemove.TabIndex = 8;
@@ -123,11 +126,21 @@
             this.optionButton.UseVisualStyleBackColor = true;
             this.optionButton.Click += new System.EventHandler(this.optionButton_Click);
             // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(437, 206);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(165, 164);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 10;
+            this.pictureBox.TabStop = false;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(840, 382);
+            this.ClientSize = new System.Drawing.Size(627, 382);
+            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.optionButton);
             this.Controls.Add(this.lblRemove);
             this.Controls.Add(this.btnMoveDown);
@@ -139,6 +152,7 @@
             this.Name = "Form2";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,5 +169,6 @@
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Label lblRemove;
         private System.Windows.Forms.Button optionButton;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }
